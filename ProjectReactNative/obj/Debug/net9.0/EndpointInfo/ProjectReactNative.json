@@ -1,0 +1,2097 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "ProjectReactNative",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Animal/GetAllAnimals": {
+      "get": {
+        "tags": [
+          "Animal"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Animal/GetAnimal/{id}": {
+      "get": {
+        "tags": [
+          "Animal"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Animal/CreateAnimals": {
+      "post": {
+        "tags": [
+          "Animal"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Animals"
+                ],
+                "type": "object",
+                "properties": {
+                  "Animals": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AnimalCreateDTO"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Animals": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Animal/UpdateAnimal": {
+      "post": {
+        "tags": [
+          "Animal"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "AnimalId",
+                  "HabitatId",
+                  "Name"
+                ],
+                "type": "object",
+                "properties": {
+                  "AnimalId": {
+                    "maxLength": 10,
+                    "type": "string"
+                  },
+                  "HabitatId": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "Species": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "ScientificName": {
+                    "maxLength": 150,
+                    "type": "string"
+                  },
+                  "Description": {
+                    "maxLength": 500,
+                    "type": "string"
+                  },
+                  "LocationCoordinates": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "Status": {
+                    "maxLength": 50,
+                    "type": "string"
+                  },
+                  "DateOfBirth": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "ArrivalDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "ImageIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "AnimalId": {
+                  "style": "form"
+                },
+                "HabitatId": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "Species": {
+                  "style": "form"
+                },
+                "ScientificName": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "LocationCoordinates": {
+                  "style": "form"
+                },
+                "Status": {
+                  "style": "form"
+                },
+                "DateOfBirth": {
+                  "style": "form"
+                },
+                "ArrivalDate": {
+                  "style": "form"
+                },
+                "ImageIds": {
+                  "style": "form"
+                },
+                "Images": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Animal/DeleteAnimals": {
+      "post": {
+        "tags": [
+          "Animal"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Authen/GetUser/{id}": {
+      "get": {
+        "tags": [
+          "Authen"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Authen/Login": {
+      "post": {
+        "tags": [
+          "Authen"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Authen/Register": {
+      "post": {
+        "tags": [
+          "Authen"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterationRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterationRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterationRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Authen/GetNewTokenFromRefreshToken": {
+      "post": {
+        "tags": [
+          "Authen"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Event/GetAllEvents": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Event/GetEvent/{id}": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Event/CreateEvents": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Events"
+                ],
+                "type": "object",
+                "properties": {
+                  "Events": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EventCreateDTO"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Events": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Event/UpdateEvent": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "EventId",
+                  "Title"
+                ],
+                "type": "object",
+                "properties": {
+                  "EventId": {
+                    "maxLength": 10,
+                    "type": "string"
+                  },
+                  "Title": {
+                    "maxLength": 200,
+                    "type": "string"
+                  },
+                  "Description": {
+                    "maxLength": 1000,
+                    "type": "string"
+                  },
+                  "Location": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "LocationCoordinates": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "Status": {
+                    "maxLength": 50,
+                    "type": "string"
+                  },
+                  "EventDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "StartTime": {
+                    "type": "string",
+                    "format": "date-span"
+                  },
+                  "EndTime": {
+                    "type": "string",
+                    "format": "date-span"
+                  },
+                  "ImageIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "EventId": {
+                  "style": "form"
+                },
+                "Title": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Location": {
+                  "style": "form"
+                },
+                "LocationCoordinates": {
+                  "style": "form"
+                },
+                "Status": {
+                  "style": "form"
+                },
+                "EventDate": {
+                  "style": "form"
+                },
+                "StartTime": {
+                  "style": "form"
+                },
+                "EndTime": {
+                  "style": "form"
+                },
+                "ImageIds": {
+                  "style": "form"
+                },
+                "Images": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Event/DeleteEvents": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Facility/GetAllFacilities": {
+      "get": {
+        "tags": [
+          "Facility"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Facility/GetFacilitie/{id}": {
+      "get": {
+        "tags": [
+          "Facility"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Facility/CreateFacilitie": {
+      "post": {
+        "tags": [
+          "Facility"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacilityCreateListDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacilityCreateListDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacilityCreateListDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Facility/UpdateFacilitie": {
+      "post": {
+        "tags": [
+          "Facility"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacilityUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacilityUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacilityUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Facility/DeleteFacilitie": {
+      "post": {
+        "tags": [
+          "Facility"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Habitat/GetAllHabitats": {
+      "get": {
+        "tags": [
+          "Habitat"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Habitat/GetHabitat/{id}": {
+      "get": {
+        "tags": [
+          "Habitat"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Habitat/CreateHabitats": {
+      "post": {
+        "tags": [
+          "Habitat"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HabitatCreateListDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HabitatCreateListDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/HabitatCreateListDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Habitat/UpdateHabitat": {
+      "post": {
+        "tags": [
+          "Habitat"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HabitatUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HabitatUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/HabitatUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Habitat/DeleteHabitats": {
+      "post": {
+        "tags": [
+          "Habitat"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/News/GetAllNews": {
+      "get": {
+        "tags": [
+          "News"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/News/GetNews/{id}": {
+      "get": {
+        "tags": [
+          "News"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/News/CreateNews": {
+      "post": {
+        "tags": [
+          "News"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "News"
+                ],
+                "type": "object",
+                "properties": {
+                  "News": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/NewsCreateDTO"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "News": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/News/UpdateNews": {
+      "post": {
+        "tags": [
+          "News"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "NewsId",
+                  "Title"
+                ],
+                "type": "object",
+                "properties": {
+                  "NewsId": {
+                    "maxLength": 10,
+                    "type": "string"
+                  },
+                  "Title": {
+                    "maxLength": 200,
+                    "type": "string"
+                  },
+                  "Contents": {
+                    "maxLength": 2000,
+                    "type": "string"
+                  },
+                  "ImageIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "NewsId": {
+                  "style": "form"
+                },
+                "Title": {
+                  "style": "form"
+                },
+                "Contents": {
+                  "style": "form"
+                },
+                "ImageIds": {
+                  "style": "form"
+                },
+                "Images": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/News/DeleteNews": {
+      "post": {
+        "tags": [
+          "News"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Product/GetAllProducts": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Product/GetProduct/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Product/CreateProduct": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Products"
+                ],
+                "type": "object",
+                "properties": {
+                  "Products": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ProductCreateDTO"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Products": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Product/UpdateProduct": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Name",
+                  "ProductId"
+                ],
+                "type": "object",
+                "properties": {
+                  "ProductId": {
+                    "maxLength": 10,
+                    "type": "string"
+                  },
+                  "Name": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "Description": {
+                    "maxLength": 1000,
+                    "type": "string"
+                  },
+                  "Price": {
+                    "minimum": 0,
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "StockQuantity": {
+                    "maximum": 2147483647,
+                    "minimum": 0,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "QrCodeUrl": {
+                    "maxLength": 500,
+                    "type": "string"
+                  },
+                  "ImageIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "ProductId": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Price": {
+                  "style": "form"
+                },
+                "StockQuantity": {
+                  "style": "form"
+                },
+                "QrCodeUrl": {
+                  "style": "form"
+                },
+                "ImageIds": {
+                  "style": "form"
+                },
+                "Images": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Product/DeleteProduct": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ticket/GetAllTickets": {
+      "get": {
+        "tags": [
+          "Ticket"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "currentPage",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ticket/GetTicket/{id}": {
+      "get": {
+        "tags": [
+          "Ticket"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ticket/CreateTickets": {
+      "post": {
+        "tags": [
+          "Ticket"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Tickets"
+                ],
+                "type": "object",
+                "properties": {
+                  "Tickets": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TicketCreateDTO"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Tickets": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ticket/UpdateTicket": {
+      "post": {
+        "tags": [
+          "Ticket"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "TicketId",
+                  "TicketType"
+                ],
+                "type": "object",
+                "properties": {
+                  "TicketId": {
+                    "maxLength": 50,
+                    "type": "string"
+                  },
+                  "TicketType": {
+                    "maxLength": 50,
+                    "type": "string"
+                  },
+                  "Description": {
+                    "maxLength": 255,
+                    "type": "string"
+                  },
+                  "Price": {
+                    "minimum": 0,
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "PurchaseDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "VisitDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "ImageIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "TicketId": {
+                  "style": "form"
+                },
+                "TicketType": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Price": {
+                  "style": "form"
+                },
+                "PurchaseDate": {
+                  "style": "form"
+                },
+                "VisitDate": {
+                  "style": "form"
+                },
+                "ImageIds": {
+                  "style": "form"
+                },
+                "Images": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ticket/DeleteTickets": {
+      "post": {
+        "tags": [
+          "Ticket"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnimalCreateDTO": {
+        "required": [
+          "habitatId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "habitatId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "species": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "scientificName": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationCoordinates": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "maxLength": 1,
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "arrivalDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventCreateDTO": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "locationCoordinates": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacilityCreateDTO": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "locationCoordinates": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "openingHours": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacilityCreateListDTO": {
+        "required": [
+          "facilities"
+        ],
+        "type": "object",
+        "properties": {
+          "facilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FacilityCreateDTO"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacilityUpdateDTO": {
+        "required": [
+          "facilityId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "facilityId": {
+            "maxLength": 10,
+            "minLength": 1,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "locationCoordinates": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "openingHours": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HabitatCreateDTO": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HabitatCreateListDTO": {
+        "required": [
+          "habitats"
+        ],
+        "type": "object",
+        "properties": {
+          "habitats": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HabitatCreateDTO"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "HabitatUpdateDTO": {
+        "required": [
+          "habitatId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "habitatId": {
+            "maxLength": 10,
+            "minLength": 1,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 500,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginRequestDTO": {
+        "required": [
+          "identifier",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewsCreateDTO": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "contents": {
+            "maxLength": 2000,
+            "type": "string",
+            "nullable": true
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductCreateDTO": {
+        "required": [
+          "name",
+          "scanId"
+        ],
+        "type": "object",
+        "properties": {
+          "scanId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "stockQuantity": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterationRequestDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "maxLength": 255,
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "phone": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketCreateDTO": {
+        "required": [
+          "ticketType"
+        ],
+        "type": "object",
+        "properties": {
+          "ticketType": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "purchaseDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "visitDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TokenDTO": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

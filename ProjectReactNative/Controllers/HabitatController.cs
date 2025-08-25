@@ -1,6 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectReactNative.Controllers
 {
@@ -20,7 +19,7 @@ namespace ProjectReactNative.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllHabitats([Required] int pageSize = 10, [Required] int currentPage = 1, string search = "")
         {
-            return await _controllerHelper.HandleRequest(() => _habitatService.GetAllAsync(pageSize, currentPage, search, null));
+            return await _controllerHelper.HandleRequest(() => _habitatService.GetAllHabitats(pageSize, currentPage, search));
         }
 
         [HttpGet("{id}")]
@@ -44,7 +43,13 @@ namespace ProjectReactNative.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteHabitats([FromBody] IEnumerable<string> ids)
         {
-            return await _controllerHelper.HandleRequest(() => _habitatService.DeleteAsync(ids));
+            return await _controllerHelper.HandleRequest(
+                async () =>
+                {
+                    await _habitatService.DeleteLocationAsync(ids);
+                    return await _habitatService.DeleteImagesAsync(ids);
+                }
+            );
         }
     }
 }

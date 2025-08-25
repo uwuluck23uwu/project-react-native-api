@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
-using ClassLibrary.Models.Data;
-using ClassLibrary.Models.Dto;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ProjectReactNative.Services
 {
@@ -14,9 +13,10 @@ namespace ProjectReactNative.Services
 
         public TicketService(
             ApplicationDbContext db,
+            IHubContext<SignalHub> hub,
             IMapper mapper,
             IImageService imageService
-        ) : base(db)
+        ) : base(db, hub)
         {
             _db = db;
             _mapper = mapper;
@@ -97,7 +97,7 @@ namespace ProjectReactNative.Services
 
         public async Task<ResponseMessage> UpdateAsync(TicketUpdateDTO updateDTO)
         {
-            var model = await dbSet.FirstOrDefaultAsync(x => x.TicketId == updateDTO.TicketId);
+            var model = await _dbSet.FirstOrDefaultAsync(x => x.TicketId == updateDTO.TicketId);
 
             if (model == null)
             {

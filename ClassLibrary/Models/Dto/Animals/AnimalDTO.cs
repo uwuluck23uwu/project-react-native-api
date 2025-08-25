@@ -17,8 +17,6 @@ namespace ClassLibrary.Models.Dto
 
         public string Description { get; set; }
 
-        public string LocationCoordinates { get; set; }
-
         public string Status { get; set; }
 
         public DateTime? DateOfBirth { get; set; }
@@ -30,6 +28,8 @@ namespace ClassLibrary.Models.Dto
         public DateTime? UpdatedAt { get; set; }
 
         public virtual Habitat Habitat { get; set; }
+
+        public LocationDTO Location { get; set; }
 
         public List<ImageDTO> Images { get; set; }
     }

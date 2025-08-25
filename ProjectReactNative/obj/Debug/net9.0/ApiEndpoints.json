@@ -112,11 +112,6 @@
         "IsRequired": false
       },
       {
-        "Name": "LocationCoordinates",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "Status",
         "Type": "System.String",
         "IsRequired": false
@@ -129,6 +124,41 @@
       {
         "Name": "ArrivalDate",
         "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.LocationId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.RefId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.X",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.Y",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.Activities",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
@@ -203,6 +233,22 @@
       {
         "Name": "registerationRequestDTO",
         "Type": "ClassLibrary.Models.Dto.RegisterationRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectReactNative.Controllers.AuthenController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/Authen/UpdateUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateDTO",
+        "Type": "ClassLibrary.Models.Dto.UserDTO",
         "IsRequired": true
       }
     ],
@@ -306,16 +352,6 @@
         "IsRequired": false
       },
       {
-        "Name": "Location",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "LocationCoordinates",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "Status",
         "Type": "System.String",
         "IsRequired": false
@@ -341,99 +377,44 @@
         "IsRequired": false
       },
       {
+        "Name": "Location.LocationId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.RefId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.X",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.Y",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Location.Activities",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "Images",
         "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectReactNative.Controllers.FacilityController",
-    "Method": "CreateFacilitie",
-    "RelativePath": "api/Facility/CreateFacilitie",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "createDTOs",
-        "Type": "ClassLibrary.Models.Dto.FacilityCreateListDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectReactNative.Controllers.FacilityController",
-    "Method": "DeleteFacilitie",
-    "RelativePath": "api/Facility/DeleteFacilitie",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ids",
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectReactNative.Controllers.FacilityController",
-    "Method": "GetAllFacilities",
-    "RelativePath": "api/Facility/GetAllFacilities",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "currentPage",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "search",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectReactNative.Controllers.FacilityController",
-    "Method": "GetFacilitie",
-    "RelativePath": "api/Facility/GetFacilitie/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectReactNative.Controllers.FacilityController",
-    "Method": "UpdateFacilitie",
-    "RelativePath": "api/Facility/UpdateFacilitie",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "updateDTO",
-        "Type": "ClassLibrary.Models.Dto.FacilityUpdateDTO",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -524,6 +505,32 @@
         "Name": "updateDTO",
         "Type": "ClassLibrary.Models.Dto.HabitatUpdateDTO",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectReactNative.Controllers.LocationController",
+    "Method": "GetAllLocations",
+    "RelativePath": "api/Location/GetAllLocations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "currentPage",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -863,16 +870,6 @@
       {
         "Name": "Price",
         "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "PurchaseDate",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "VisitDate",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {

@@ -10,10 +10,6 @@ namespace ClassLibrary.Models.Dto
 
         public string Description { get; set; }
 
-        public string Location { get; set; }
-
-        public string LocationCoordinates { get; set; }
-
         public string Status { get; set; }
 
         public DateTime? EventDate { get; set; }
@@ -25,6 +21,8 @@ namespace ClassLibrary.Models.Dto
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
+
+        public LocationDTO Location { get; set; }
 
         public List<ImageDTO> Images { get; set; }
     }

@@ -9,5 +9,7 @@ namespace ClassLibrary.Models.Dto
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public LocationDTO Location { get; set; }
     }
 }

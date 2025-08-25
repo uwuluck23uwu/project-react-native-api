@@ -15,13 +15,9 @@ public partial class Ticket
 
     public decimal? Price { get; set; }
 
-    public DateTime? PurchaseDate { get; set; }
-
-    public DateTime? VisitDate { get; set; }
-
     public DateTime? CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
 
-    public virtual ICollection<UserTicket> UserTickets { get; set; } = new List<UserTicket>();
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

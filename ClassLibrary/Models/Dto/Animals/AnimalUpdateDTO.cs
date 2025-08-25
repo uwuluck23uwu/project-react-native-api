@@ -26,15 +26,14 @@ namespace ClassLibrary.Models.Dto
         [MaxLength(500)]
         public string Description { get; set; }
 
-        [MaxLength(100)]
-        public string LocationCoordinates { get; set; }
-
         [MaxLength(50)]
         public string Status { get; set; }
 
         public DateTime? DateOfBirth { get; set; }
 
         public DateTime? ArrivalDate { get; set; }
+
+        public LocationUpdateDTO Location { get; set; }
 
         public List<string> ImageIds { get; set; }
 

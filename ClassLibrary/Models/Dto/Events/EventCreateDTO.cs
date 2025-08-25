@@ -13,12 +13,6 @@ namespace ClassLibrary.Models.Dto
         [MaxLength(1000)]
         public string Description { get; set; }
 
-        [MaxLength(255)]
-        public string Location { get; set; }
-
-        [MaxLength(100)]
-        public string LocationCoordinates { get; set; }
-
         [MaxLength(50)]
         public string Status { get; set; }
 
@@ -27,6 +21,8 @@ namespace ClassLibrary.Models.Dto
         public TimeSpan? StartTime { get; set; }
 
         public TimeSpan? EndTime { get; set; }
+
+        public LocationCreateDTO Location { get; set; }
 
         public List<IFormFile> Images { get; set; }
     }

@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectReactNative.Controllers
@@ -46,7 +45,13 @@ namespace ProjectReactNative.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteTickets([FromBody] IEnumerable<string> ids)
         {
-            return await _controllerHelper.HandleRequest(() => _ticketService.DeleteImagesAsync(ids));
+            return await _controllerHelper.HandleRequest(
+                async () =>
+                {
+                    await _ticketService.DeleteLocationAsync(ids);
+                    return await _ticketService.DeleteImagesAsync(ids);
+                }
+            );
         }
     }
 }

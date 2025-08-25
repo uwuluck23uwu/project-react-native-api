@@ -1,5 +1,7 @@
 ﻿#nullable disable
 
+using Microsoft.AspNetCore.Http;
+
 namespace ClassLibrary.Models.Dto
 {
     public class UserDTO
@@ -21,5 +23,7 @@ namespace ClassLibrary.Models.Dto
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
+
+        public IFormFile Image { get; set; }
     }
 }

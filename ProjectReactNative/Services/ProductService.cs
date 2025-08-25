@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ProjectReactNative.Services
 {
@@ -13,10 +14,11 @@ namespace ProjectReactNative.Services
 
         public ProductService(
             ApplicationDbContext db,
+            IHubContext<SignalHub> hub,
             IMapper mapper,
             IImageService imageService,
             IQrScanLogService qrScanLogService
-        ) : base(db)
+        ) : base(db, hub)
         {
             _db = db;
             _mapper = mapper;
@@ -69,7 +71,6 @@ namespace ProjectReactNative.Services
             );
         }
 
-
         public async Task<ResponseMessage> CreateAsync(List<ProductCreateDTO> createDTOs)
         {
             foreach (var createDTO in createDTOs)
@@ -103,7 +104,7 @@ namespace ProjectReactNative.Services
 
         public async Task<ResponseMessage> UpdateAsync(ProductUpdateDTO updateDTO)
         {
-            var model = await dbSet.FirstOrDefaultAsync(x => x.ProductId == updateDTO.ProductId);
+            var model = await _dbSet.FirstOrDefaultAsync(x => x.ProductId == updateDTO.ProductId);
 
             if (model == null)
             {

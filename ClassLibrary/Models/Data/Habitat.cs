@@ -2,7 +2,6 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace ClassLibrary.Models.Data;
 
@@ -14,6 +13,5 @@ public partial class Habitat
 
     public string Description { get; set; }
 
-    [JsonIgnore]
     public virtual ICollection<Animal> Animals { get; set; } = new List<Animal>();
 }

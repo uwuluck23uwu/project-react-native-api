@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ProjectReactNative.Controllers
 {
@@ -10,7 +11,10 @@ namespace ProjectReactNative.Controllers
         private readonly IEventService _eventService;
         private readonly ControllerHelper _controllerHelper;
 
-        public EventController(IEventService eventService, IHostEnvironment hostEnvironment)
+        public EventController(
+            IEventService eventService,
+            IHostEnvironment hostEnvironment,
+            IHubContext<SignalHub> hub)
         {
             _eventService = eventService;
             _controllerHelper = new ControllerHelper(hostEnvironment);
@@ -45,7 +49,13 @@ namespace ProjectReactNative.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteEvents([FromBody] IEnumerable<string> ids)
         {
-            return await _controllerHelper.HandleRequest(() => _eventService.DeleteImagesAsync(ids));
+            return await _controllerHelper.HandleRequest(
+                async () =>
+                {
+                    await _eventService.DeleteLocationAsync(ids);
+                    return await _eventService.DeleteImagesAsync(ids);
+                }
+            );
         }
     }
 }

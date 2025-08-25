@@ -2,6 +2,7 @@
 using System.Net;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ProjectReactNative.Services
 {
@@ -9,16 +10,20 @@ namespace ProjectReactNative.Services
     {
         private readonly ApplicationDbContext _db;
         private readonly IMapper _mapper;
+        private readonly ILocationService _locationService;
         private readonly IImageService _imageService;
 
         public AnimalService(
             ApplicationDbContext db,
+            IHubContext<SignalHub> hub,
             IMapper mapper,
+            ILocationService locationService,
             IImageService imageService
-        ) : base(db)
+        ) : base(db, hub)
         {
             _db = db;
             _mapper = mapper;
+            _locationService = locationService;
             _imageService = imageService;
         }
 
@@ -36,17 +41,26 @@ namespace ProjectReactNative.Services
                 return baseResult;
             }
 
-            var animals = baseResult.Data.Cast<Animal>().ToList();
-            var animalIds = animals.Select(a => a.AnimalId).ToList();
+            var models = baseResult.Data.Cast<Animal>().ToList();
+            var modelIds = models.Select(a => a.AnimalId).ToList();
+            var locations = await _db.Locations
+                .Where(l => modelIds.Contains(l.RefId))
+                .ToListAsync();
             var images = await _db.Images
-                .Where(i => animalIds.Contains(i.RefId))
+                .Where(i => modelIds.Contains(i.RefId))
                 .ToListAsync();
 
-            var result = _mapper.Map<List<AnimalDTO>>(animals);
+            var result = _mapper.Map<List<AnimalDTO>>(models);
+            var locByRef = locations.ToDictionary(l => l.RefId, l => l);
 
             foreach (var dto in result)
             {
-                dto.Images = images
+                if (locByRef.TryGetValue(dto.AnimalId, out var loc))
+                {
+                    dto.Location = _mapper.Map<LocationDTO>(loc);
+                }
+
+                dto.Images = images 
                     .Where(img => img.RefId == dto.AnimalId)
                     .Select(img => new ImageDTO
                     {
@@ -76,6 +90,16 @@ namespace ProjectReactNative.Services
                 model.CreatedAt = DateTime.UtcNow;
                 model.UpdatedAt = DateTime.UtcNow;
 
+                await CreateAsync(model);
+
+                if (createDTO.Location != null)
+                {
+                    createDTO.Location.RefId = model.AnimalId;
+                    createDTO.Location.Name = model.Name;
+                    createDTO.Location.Description = model.Description;
+
+                    await _locationService.CreateAsync(createDTO.Location);
+                }
                 if (createDTO.Images != null)
                 {
                     foreach (var item in createDTO.Images)
@@ -83,8 +107,6 @@ namespace ProjectReactNative.Services
                         await _imageService.CreateAsync(item, model.AnimalId);
                     }
                 }
-
-                await CreateAsync(model);
             }
 
             return new ResponseMessage(
@@ -96,7 +118,7 @@ namespace ProjectReactNative.Services
 
         public async Task<ResponseMessage> UpdateAsync(AnimalUpdateDTO updateDTO)
         {
-            var model = await dbSet.FirstOrDefaultAsync(x => x.AnimalId == updateDTO.AnimalId);
+            var model = await _dbSet.FirstOrDefaultAsync(x => x.AnimalId == updateDTO.AnimalId);
 
             if (model == null)
             {
@@ -110,6 +132,23 @@ namespace ProjectReactNative.Services
             _mapper.Map(updateDTO, model);
             model.UpdatedAt = DateTime.UtcNow;
 
+            if (updateDTO.Location != null)
+            {
+                if (updateDTO.Location.LocationId == null)
+                {
+                    updateDTO.Location.RefId = model.AnimalId;
+                    updateDTO.Location.Name = model.Name;
+                    updateDTO.Location.Description = model.Description;
+
+                    LocationCreateDTO createDTO = _mapper.Map<LocationCreateDTO>(updateDTO.Location);
+
+                    await _locationService.CreateAsync(createDTO);
+                }
+                else
+                {
+                    await _locationService.UpdateAsync(updateDTO.Location);
+                }
+            }
             if (updateDTO.ImageIds != null)
             {
                 await _imageService.DeleteAsync(updateDTO.ImageIds, updateDTO.AnimalId);
@@ -122,13 +161,7 @@ namespace ProjectReactNative.Services
                 }
             }
 
-            await UpdateAsync(model);
-
-            return new ResponseMessage(
-                statusCode: HttpStatusCode.OK,
-                taskStatus: true,
-                message: $"แก้ไขข้อมูลสำเร็จ"
-            );
+            return await UpdateAsync(model);
         }
     }
 }

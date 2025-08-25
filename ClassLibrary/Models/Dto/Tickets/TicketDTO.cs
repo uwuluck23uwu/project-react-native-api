@@ -14,10 +14,6 @@ namespace ClassLibrary.Models.Dto
 
         public decimal? Price { get; set; }
 
-        public DateTime? PurchaseDate { get; set; }
-
-        public DateTime? VisitDate { get; set; }
-
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

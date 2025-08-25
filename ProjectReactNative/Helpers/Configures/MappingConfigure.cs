@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ClassLibrary.Models.Dto;
+using ClassLibrary.Models.Data;
 
 namespace ProjectReactNative.Helpers.Configures
 {
@@ -10,12 +10,13 @@ namespace ProjectReactNative.Helpers.Configures
             AddMappings<Animal, AnimalDTO, AnimalCreateDTO, AnimalUpdateDTO>();
             AddMappings<Event, EventDTO, EventCreateDTO, EventUpdateDTO>();
             //AddMappings<EventStaff, EventStaffDTO, EventStaffCreateDTO, EventStaffUpdateDTO>();
-            AddMappings<Facility, FacilityDTO, FacilityCreateDTO, FacilityUpdateDTO>();
             AddMappings<Habitat, HabitatDTO, HabitatCreateDTO, HabitatUpdateDTO>();
             //AddMappings<Image, ImageDTO, ImageCreateDTO, ImageUpdateDTO>();
+            AddMappings<Location, LocationDTO, LocationCreateDTO, LocationUpdateDTO>();
             AddMappings<News, NewsDTO, NewsCreateDTO, NewsUpdateDTO>();
-            //AddMappings<Order, OrderDTO, OrderCreateDTO, OrderUpdateDTO>();
-            //AddMappings<OrderItem, OrderItemDTO, OrderItemCreateDTO, OrderItemUpdateDTO>();
+            AddMappings<OrderItem, OrderItemDTO, OrderItemCreateDTO, OrderItemUpdateDTO>();
+            AddMappings<Order, OrderDTO, OrderCreateDTO, OrderUpdateDTO>();
+            AddMappings<Payment, PaymentDTO, PaymentCreateDTO, PaymentUpdateDTO>();
             AddMappings<Product, ProductDTO, ProductCreateDTO, ProductUpdateDTO>();
             //AddMappings<QrScanLog, QrScanLogDTO, QrScanLogCreateDTO, QrScanLogUpdateDTO>();
             //AddMappings<RefreshToken, RefreshTokenDTO, RefreshTokenCreateDTO, RefreshTokenUpdateDTO>();
@@ -30,6 +31,7 @@ namespace ProjectReactNative.Helpers.Configures
             CreateMap<TModel, TDTO>().ReverseMap();
             CreateMap<TModel, TCreateDTO>().ReverseMap();
             CreateMap<TModel, TUpdateDTO>().ReverseMap();
+            CreateMap<TCreateDTO, TUpdateDTO>().ReverseMap();
         }
     }
 }

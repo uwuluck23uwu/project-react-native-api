@@ -2,28 +2,28 @@
 using System.Net;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ProjectReactNative.Services
 {
     public class Service<T> : IService<T> where T : class
     {
         private readonly ApplicationDbContext _db;
-        internal DbSet<T> dbSet;
+        private readonly IHubContext<SignalHub> _hub;
+        internal DbSet<T> _dbSet;
 
-        public Service(ApplicationDbContext db)
+        public Service(
+            ApplicationDbContext db,
+            IHubContext<SignalHub> hub)
         {
             _db = db;
-            dbSet = _db.Set<T>();
+            _hub = hub;
+            _dbSet = _db.Set<T>();
         }
 
-        public virtual async Task<ResponsePagination> GetAllAsync(
-            int pageSize,
-            int currentPage,
-            string search,
-            Expression<Func<T, object>>[]? includes
-        )
+        public virtual async Task<ResponsePagination> GetAllAsync(int pageSize, int currentPage, string search, Expression<Func<T, object>>[]? includes)
         {
-            var query = dbSet.AsQueryable();
+            var query = _dbSet.AsQueryable();
 
             if (includes != null)
             {
@@ -90,10 +90,9 @@ namespace ProjectReactNative.Services
             );
         }
 
-
         public async Task<ResponseData> GetAsync(Expression<Func<T, bool>> id)
         {
-            var query = dbSet.AsQueryable();
+            var query = _dbSet.AsQueryable();
 
             var item = await query.FirstOrDefaultAsync(id);
 
@@ -117,8 +116,14 @@ namespace ProjectReactNative.Services
 
         public async Task<ResponseMessage> CreateAsync(T model)
         {
-            await dbSet.AddAsync(model);
+            await _dbSet.AddAsync(model);
             await SaveAsync();
+
+            await _hub.Clients.All.SendAsync($"{typeof(T).Name}Changed", new
+            {
+                Action = "Created",
+                Id = GetEntityId(model)
+            });
 
             return new ResponseMessage(
                 statusCode: HttpStatusCode.OK,
@@ -129,10 +134,16 @@ namespace ProjectReactNative.Services
 
         public async Task<ResponseMessage> UpdateAsync(T model)
         {
-            dbSet.Attach(model);
+            _dbSet.Attach(model);
             _db.Entry(model).State = EntityState.Modified;
 
             await SaveAsync();
+
+            await _hub.Clients.All.SendAsync($"{typeof(T).Name}Changed", new
+            {
+                Action = "Updated",
+                Id = GetEntityId(model)
+            });
 
             return new ResponseMessage(
                 statusCode: HttpStatusCode.OK,
@@ -143,7 +154,7 @@ namespace ProjectReactNative.Services
 
         public async Task<ResponseMessage> DeleteAsync(IEnumerable<string> ids)
         {
-            var query = dbSet.AsQueryable();
+            var query = _dbSet.AsQueryable();
 
             var idProperty = typeof(T).GetProperties().FirstOrDefault(p => p.Name.EndsWith("Id", StringComparison.OrdinalIgnoreCase));
 
@@ -167,8 +178,14 @@ namespace ProjectReactNative.Services
                 );
             }
 
-            dbSet.RemoveRange(entities);
+            _dbSet.RemoveRange(entities);
             await SaveAsync();
+
+            await _hub.Clients.All.SendAsync($"{typeof(T).Name}Changed", new
+            {
+                Action = "Deleted",
+                Ids = ids
+            });
 
             return new ResponseMessage(
                 statusCode: HttpStatusCode.OK,
@@ -201,6 +218,42 @@ namespace ProjectReactNative.Services
                 return response;
             }
 
+            await _hub.Clients.All.SendAsync($"{typeof(T).Name}Changed", new
+            {
+                Action = "Deleted",
+                Related = "Image",
+                Ids = ids
+            });
+
+            return new ResponseMessage(
+                statusCode: HttpStatusCode.OK,
+                taskStatus: true,
+                message: "ลบข้อมูลสำเร็จ"
+            );
+        }
+
+        public async Task<ResponseMessage> DeleteLocationAsync(IEnumerable<string> ids)
+        {
+            var locations = await _db.Locations
+                .Where(i => ids.Contains(i.RefId))
+                .ToListAsync();
+
+            _db.Locations.RemoveRange(locations);
+
+            var response = await DeleteAsync(ids);
+
+            if (!response.TaskStatus)
+            {
+                return response;
+            }
+
+            await _hub.Clients.All.SendAsync($"{typeof(T).Name}Changed", new
+            {
+                Action = "Deleted",
+                Related = "Location",
+                Ids = ids
+            });
+
             return new ResponseMessage(
                 statusCode: HttpStatusCode.OK,
                 taskStatus: true,
@@ -226,7 +279,7 @@ namespace ProjectReactNative.Services
             var startsWithCall = Expression.Call(property, startsWithMethod!, prefixConstant);
 
             var whereLambda = Expression.Lambda<Func<T, bool>>(startsWithCall, param);
-            var query = dbSet.Where(whereLambda);
+            var query = _dbSet.Where(whereLambda);
 
             var orderByLambda = Expression.Lambda<Func<T, string>>(property, param);
             var lastEntity = await query.OrderByDescending(orderByLambda).FirstOrDefaultAsync();
@@ -242,6 +295,13 @@ namespace ProjectReactNative.Services
             }
 
             return $"{prefix}{nextNumber.ToString("D2")}";
+        }
+
+        protected static string? GetEntityId(T model)
+        {
+            var idProp = typeof(T).GetProperties()
+                .FirstOrDefault(p => p.Name.EndsWith("Id", StringComparison.OrdinalIgnoreCase));
+            return idProp?.GetValue(model)?.ToString();
         }
     }
 }

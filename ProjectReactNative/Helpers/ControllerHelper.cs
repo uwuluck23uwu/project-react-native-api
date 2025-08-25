@@ -14,16 +14,23 @@ namespace ProjectReactNative.Helpers
             _encrypt = new JsonResponse();
         }
 
-        public async Task<IActionResult> HandleRequest<T>(Func<Task<T>> action) where T : ResponseBase
+        public async Task<IActionResult> HandleRequest<T>(
+            Func<Task<T>> action,
+            Func<T, Task>? onSuccess = null) where T : ResponseBase
         {
             try
             {
                 var response = await action();
+
+                if (onSuccess != null && response.TaskStatus)
+                    await onSuccess(response);
+
                 return CreateResponse(response);
             }
             catch (Exception e)
             {
-                return new BadRequestObjectResult(new ResponseErrorMessages(HttpStatusCode.BadRequest, false, e.Message));
+                return new BadRequestObjectResult(
+                    new ResponseErrorMessages(HttpStatusCode.BadRequest, false, e.Message));
             }
         }
 

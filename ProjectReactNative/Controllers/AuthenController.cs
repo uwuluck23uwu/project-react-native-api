@@ -36,6 +36,13 @@ namespace ProjectReactNative.Controllers
         }
 
         [HttpPost]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserDTO updateDTO)
+        {
+            return await _controllerHelper.HandleRequest(() => _authenService.UpdateAsync(updateDTO));
+        }
+
+        [HttpPost]
         public async Task<IActionResult> GetNewTokenFromRefreshToken([FromBody] TokenDTO tokenDTO)
         {
             return await _controllerHelper.HandleRequest(() => _authenService.RefreshAccessToken(tokenDTO));

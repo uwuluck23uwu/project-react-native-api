@@ -10,3 +10,4 @@ D:\CS66\Teeradet\Project\Project_React_Native\project-react-native-api\ClassLibr
 D:\CS66\Teeradet\Project\Project_React_Native\project-react-native-api\ClassLibrary\obj\Debug\net9.0\refint\ClassLibrary.dll
 D:\CS66\Teeradet\Project\Project_React_Native\project-react-native-api\ClassLibrary\obj\Debug\net9.0\ClassLibrary.pdb
 D:\CS66\Teeradet\Project\Project_React_Native\project-react-native-api\ClassLibrary\obj\Debug\net9.0\ref\ClassLibrary.dll
+D:\CS66\Teeradet\Project\Project_React_Native\project-react-native-api\ClassLibrary\obj\Debug\net9.0\ClassLibrary.sourcelink.json

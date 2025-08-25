@@ -11,7 +11,7 @@ public partial class OrderItem
 
     public string OrderId { get; set; }
 
-    public string ProductId { get; set; }
+    public string RefId { get; set; }
 
     public int? Quantity { get; set; }
 
@@ -19,5 +19,7 @@ public partial class OrderItem
 
     public virtual Order Order { get; set; }
 
-    public virtual Product Product { get; set; }
+    public virtual Product Ref { get; set; }
+
+    public virtual Ticket RefNavigation { get; set; }
 }

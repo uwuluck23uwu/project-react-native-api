@@ -45,7 +45,13 @@ namespace ProjectReactNative.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteProduct([FromBody] IEnumerable<string> ids)
         {
-            return await _controllerHelper.HandleRequest(() => _productService.DeleteImagesAsync(ids));
+            return await _controllerHelper.HandleRequest(
+                async () =>
+                {
+                    await _productService.DeleteLocationAsync(ids);
+                    return await _productService.DeleteImagesAsync(ids);
+                }
+            );
         }
     }
 }

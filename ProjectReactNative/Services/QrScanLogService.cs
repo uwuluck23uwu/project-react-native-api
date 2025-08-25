@@ -1,4 +1,5 @@
-﻿using QRCoder;
+﻿using Microsoft.AspNetCore.SignalR;
+using QRCoder;
 using System.Net;
 
 namespace ProjectReactNative.Services
@@ -8,7 +9,11 @@ namespace ProjectReactNative.Services
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _hostEnvironment;
 
-        public QrScanLogService(ApplicationDbContext db, IWebHostEnvironment hostEnvironment) : base(db)
+        public QrScanLogService(
+            ApplicationDbContext db,
+            IHubContext<SignalHub> hub,
+            IWebHostEnvironment hostEnvironment
+        ) : base(db, hub)
         {
             _db = db;
             _hostEnvironment = hostEnvironment;

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
-using ClassLibrary.Models.Data;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ProjectReactNative.Services
 {
@@ -11,7 +11,12 @@ namespace ProjectReactNative.Services
         private readonly IMapper _mapper;
         private readonly IImageService _imageService;
 
-        public NewsService(ApplicationDbContext db, IMapper mapper, IImageService imageServic) : base(db)
+        public NewsService(
+            ApplicationDbContext db,
+            IHubContext<SignalHub> hub,
+            IMapper mapper,
+            IImageService imageServic
+        ) : base(db, hub)
         {
             _db = db;
             _mapper = mapper;
@@ -93,7 +98,7 @@ namespace ProjectReactNative.Services
 
         public async Task<ResponseMessage> UpdateAsync(NewsUpdateDTO updateDTO)
         {
-            var model = await dbSet.FirstOrDefaultAsync(x => x.NewsId == updateDTO.NewsId);
+            var model = await _dbSet.FirstOrDefaultAsync(x => x.NewsId == updateDTO.NewsId);
 
             if (model == null)
             {

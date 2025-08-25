@@ -10,5 +10,6 @@ namespace ProjectReactNative.Services.IServices
         Task<ResponseMessage> UpdateAsync(T model);
         Task<ResponseMessage> DeleteAsync(IEnumerable<string> ids);
         Task<ResponseMessage> DeleteImagesAsync(IEnumerable<string> ids);
+        Task<ResponseMessage> DeleteLocationAsync(IEnumerable<string> ids);
     }
 }

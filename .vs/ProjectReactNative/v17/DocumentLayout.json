@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|d:\\cs66\\teeradet\\project\\project_react_native\\project-react-native-api\\projectreactnative\\services\\animalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|solutionrelative:projectreactnative\\services\\animalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|d:\\cs66\\teeradet\\project\\project_react_native\\project-react-native-api\\projectreactnative\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|solutionrelative:projectreactnative\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|d:\\cs66\\teeradet\\project\\project_react_native\\project-react-native-api\\projectreactnative\\controllers\\animalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|solutionrelative:projectreactnative\\controllers\\animalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|d:\\cs66\\teeradet\\project\\project_react_native\\project-react-native-api\\projectreactnative\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|solutionrelative:projectreactnative\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|d:\\cs66\\teeradet\\project\\project_react_native\\project-react-native-api\\projectreactnative\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|solutionrelative:projectreactnative\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|d:\\cs66\\teeradet\\project\\project_react_native\\project-react-native-api\\projectreactnative\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|solutionrelative:projectreactnative\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|d:\\cs66\\teeradet\\project\\project_react_native\\project-react-native-api\\projectreactnative\\services\\qrscanlogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|solutionrelative:projectreactnative\\services\\qrscanlogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|d:\\cs66\\teeradet\\project\\project_react_native\\project-react-native-api\\projectreactnative\\services\\iservices\\iqrscanlogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|solutionrelative:projectreactnative\\services\\iservices\\iqrscanlogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|d:\\cs66\\teeradet\\project\\project_react_native\\project-react-native-api\\projectreactnative\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CB34E594-6F30-4DA7-B290-E0087EDDDDC1}|ProjectReactNative\\ProjectReactNative.csproj|solutionrelative:projectreactnative\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,64 +22,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AnimalController.cs",
-              "DocumentMoniker": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Controllers\\AnimalController.cs",
-              "RelativeDocumentMoniker": "ProjectReactNative\\Controllers\\AnimalController.cs",
-              "ToolTip": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Controllers\\AnimalController.cs",
-              "RelativeToolTip": "ProjectReactNative\\Controllers\\AnimalController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAIwCAAAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T02:23:18.551Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AnimalService.cs",
-              "DocumentMoniker": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Services\\AnimalService.cs",
-              "RelativeDocumentMoniker": "ProjectReactNative\\Services\\AnimalService.cs",
-              "ToolTip": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Services\\AnimalService.cs",
-              "RelativeToolTip": "ProjectReactNative\\Services\\AnimalService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-18T04:58:33.922Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IQrScanLogService.cs",
-              "DocumentMoniker": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Services\\IServices\\IQrScanLogService.cs",
-              "RelativeDocumentMoniker": "ProjectReactNative\\Services\\IServices\\IQrScanLogService.cs",
-              "ToolTip": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Services\\IServices\\IQrScanLogService.cs",
-              "RelativeToolTip": "ProjectReactNative\\Services\\IServices\\IQrScanLogService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T15:15:15.117Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "QrScanLogService.cs",
-              "DocumentMoniker": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Services\\QrScanLogService.cs",
-              "RelativeDocumentMoniker": "ProjectReactNative\\Services\\QrScanLogService.cs",
-              "ToolTip": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Services\\QrScanLogService.cs",
-              "RelativeToolTip": "ProjectReactNative\\Services\\QrScanLogService.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA0wA0AAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T15:15:34.989Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -102,28 +34,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Controllers\\ProductController.cs",
-              "RelativeDocumentMoniker": "ProjectReactNative\\Controllers\\ProductController.cs",
-              "ToolTip": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Controllers\\ProductController.cs",
-              "RelativeToolTip": "ProjectReactNative\\Controllers\\ProductController.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAYwB8AAAApAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "ProjectReactNative\\Controllers\\OrderController.cs",
+              "ToolTip": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "ProjectReactNative\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T14:09:50.05Z",
+              "WhenOpened": "2025-08-25T08:10:50.759Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Services\\OrderService.cs",
+              "RelativeDocumentMoniker": "ProjectReactNative\\Services\\OrderService.cs",
+              "ToolTip": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Services\\OrderService.cs",
+              "RelativeToolTip": "ProjectReactNative\\Services\\OrderService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T08:06:56.029Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ProductService.cs",
-              "DocumentMoniker": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Services\\ProductService.cs",
-              "RelativeDocumentMoniker": "ProjectReactNative\\Services\\ProductService.cs",
-              "ToolTip": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Services\\ProductService.cs",
-              "RelativeToolTip": "ProjectReactNative\\Services\\ProductService.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAYwAgAAAAyAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Program.cs",
+              "RelativeDocumentMoniker": "ProjectReactNative\\Program.cs",
+              "ToolTip": "D:\\CS66\\Teeradet\\Project\\Project_React_Native\\project-react-native-api\\ProjectReactNative\\Program.cs",
+              "RelativeToolTip": "ProjectReactNative\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T14:09:54.421Z",
+              "WhenOpened": "2025-08-25T07:19:17.642Z",
               "EditorCaption": ""
             }
           ]

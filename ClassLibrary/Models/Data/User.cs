@@ -28,6 +28,4 @@ public partial class User
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual ICollection<Staff> Staff { get; set; } = new List<Staff>();
-
-    public virtual ICollection<UserTicket> UserTickets { get; set; } = new List<UserTicket>();
 }

@@ -20,10 +20,6 @@ namespace ClassLibrary.Models.Dto
         [Range(0, double.MaxValue)]
         public decimal? Price { get; set; }
 
-        public DateTime? PurchaseDate { get; set; }
-
-        public DateTime? VisitDate { get; set; }
-
         public List<string> ImageIds { get; set; }
 
         public List<IFormFile> Images { get; set; }

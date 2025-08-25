@@ -13,10 +13,6 @@ public partial class Event
 
     public string Description { get; set; }
 
-    public string Location { get; set; }
-
-    public string LocationCoordinates { get; set; }
-
     public string Status { get; set; }
 
     public DateTime? EventDate { get; set; }

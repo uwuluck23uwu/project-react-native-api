@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ProjectReactNative.Services
 {
@@ -8,16 +9,20 @@ namespace ProjectReactNative.Services
     {
         private readonly ApplicationDbContext _db;
         private readonly IMapper _mapper;
+        private readonly ILocationService _locationService;
         private readonly IImageService _imageService;
 
         public EventService(
             ApplicationDbContext db,
+            IHubContext<SignalHub> hub,
             IMapper mapper,
+            ILocationService locationService,
             IImageService imageService
-        ) : base(db)
+        ) : base(db, hub)
         {
             _db = db;
             _mapper = mapper;
+            _locationService = locationService;
             _imageService = imageService;
         }
 
@@ -35,20 +40,28 @@ namespace ProjectReactNative.Services
                 return baseResult;
             }
 
-            var events = baseResult.Data.Cast<Event>().ToList();
-            var eventIds = events.Select(a => a.EventId).ToList();
-
+            var models = baseResult.Data.Cast<Event>().ToList();
+            var modelIds = models.Select(a => a.EventId).ToList();
+            var locations = await _db.Locations
+                .Where(l => modelIds.Contains(l.RefId))
+                .ToListAsync();
             var images = await _db.Images
-                .Where(i => eventIds.Contains(i.RefId))
+                .Where(i => modelIds.Contains(i.RefId))
                 .ToListAsync();
 
-            var result = _mapper.Map<List<EventDTO>>(events);
+            var result = _mapper.Map<List<EventDTO>>(models);
+            var locByRef = locations.ToDictionary(l => l.RefId, l => l);
 
             foreach (var dto in result)
             {
+
                 if (dto.Status != "4")
                 {
                     dto.Status = CalculateEventStatus(dto.EventDate, dto.StartTime, dto.EndTime, dto.Status);
+                }
+                if (locByRef.TryGetValue(dto.EventId, out var loc))
+                {
+                    dto.Location = _mapper.Map<LocationDTO>(loc);
                 }
 
                 dto.Images = images
@@ -82,6 +95,16 @@ namespace ProjectReactNative.Services
                 model.CreatedAt = DateTime.UtcNow;
                 model.UpdatedAt = DateTime.UtcNow;
 
+                await CreateAsync(model);
+
+                if (createDTO.Location != null)
+                {
+                    createDTO.Location.RefId = model.EventId;
+                    createDTO.Location.Name = model.Title;
+                    createDTO.Location.Description = model.Description;
+
+                    await _locationService.CreateAsync(createDTO.Location);
+                }
                 if (createDTO.Images != null)
                 {
                     foreach (var item in createDTO.Images)
@@ -89,8 +112,6 @@ namespace ProjectReactNative.Services
                         await _imageService.CreateAsync(item, model.EventId);
                     }
                 }
-
-                await CreateAsync(model);
             }
 
             return new ResponseMessage(
@@ -102,7 +123,7 @@ namespace ProjectReactNative.Services
 
         public async Task<ResponseMessage> UpdateAsync(EventUpdateDTO updateDTO)
         {
-            var model = await dbSet.FirstOrDefaultAsync(x => x.EventId == updateDTO.EventId);
+            var model = await _dbSet.FirstOrDefaultAsync(x => x.EventId == updateDTO.EventId);
 
             if (model == null)
             {
@@ -117,6 +138,23 @@ namespace ProjectReactNative.Services
             model.Status = "5";
             model.UpdatedAt = DateTime.UtcNow;
 
+            if (updateDTO.Location != null)
+            {
+                if (updateDTO.Location.LocationId == null)
+                {
+                    updateDTO.Location.RefId = model.EventId;
+                    updateDTO.Location.Name = model.Title;
+                    updateDTO.Location.Description = model.Description;
+
+                    LocationCreateDTO createDTO = _mapper.Map<LocationCreateDTO>(updateDTO.Location);
+
+                    await _locationService.CreateAsync(createDTO);
+                }
+                else
+                {
+                    await _locationService.UpdateAsync(updateDTO.Location);
+                }
+            }
             if (updateDTO.ImageIds != null)
             {
                 await _imageService.DeleteAsync(updateDTO.ImageIds, updateDTO.EventId);

@@ -5,13 +5,16 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ProjectReactNative.Services
 {
-    public class AuthenService : IAuthenService
+    public class AuthenService : Service<User>, IAuthenService
     {
         private readonly ApplicationDbContext _db;
+        private readonly IHubContext<SignalHub> _hub;
         private readonly IMapper _mapper;
+        private readonly IImageService _imageService;
         private readonly string _issuer;
         private readonly string _audience;
         private readonly string _secretKey;
@@ -20,11 +23,16 @@ namespace ProjectReactNative.Services
 
         public AuthenService(
             ApplicationDbContext db,
+            IHubContext<SignalHub> hub,
             IMapper mapper,
-            IConfiguration configuration)
+            IImageService imageService,
+            IConfiguration configuration
+        ) : base(db, hub)
         {
             _db = db;
+            _hub = hub;
             _mapper = mapper;
+            _imageService = imageService;
             _issuer = configuration.GetValue<string>("JwtSettings:Issuer");
             _audience = configuration.GetValue<string>("JwtSettings:Audience");
             _secretKey = configuration.GetValue<string>("Settings:SecretProgram");
@@ -136,6 +144,33 @@ namespace ProjectReactNative.Services
                     RefreshToken = refreshToken
                 }
             );
+        }
+
+        public async Task<ResponseMessage> UpdateAsync(UserDTO updateDTO)
+        {
+            var model = await _dbSet.FirstOrDefaultAsync(x => x.UserId == updateDTO.UserId);
+
+            if (model == null)
+            {
+                return new ResponseMessage(
+                    statusCode: HttpStatusCode.NotFound,
+                    taskStatus: false,
+                    message: "ไม่พบข้อมูล Product ที่ต้องการอัปเดต"
+                );
+            }
+
+            _mapper.Map(updateDTO, model);
+            model.UpdatedAt = DateTime.UtcNow;
+
+            if (updateDTO.Image != null)
+            {
+                var cleanedImageUrl = updateDTO.ImageUrl?.Replace("/images/", "").TrimStart('/');
+
+                var image = await _imageService.UpdateAsync(updateDTO.Image, cleanedImageUrl);
+                model.ImageUrl = image.Message;
+            }
+
+            return await UpdateAsync(model);
         }
 
         public async Task<ResponseData> RefreshAccessToken(TokenDTO tokenDTO)

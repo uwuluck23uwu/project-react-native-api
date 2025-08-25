@@ -11,5 +11,7 @@ namespace ClassLibrary.Models.Dto
 
         [MaxLength(500)]
         public string Description { get; set; }
+
+        public LocationCreateDTO Location { get; set; }
     }
 }

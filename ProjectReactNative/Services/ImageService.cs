@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace ProjectReactNative.Services
@@ -10,8 +11,9 @@ namespace ProjectReactNative.Services
 
         public ImageService(
             ApplicationDbContext db,
+            IHubContext<SignalHub> hub,
             IWebHostEnvironment hostEnvironment
-        ) : base(db)
+        ) : base(db, hub)
         {
             _db = db;
             _hostEnvironment = hostEnvironment;
@@ -48,6 +50,43 @@ namespace ProjectReactNative.Services
                 statusCode: HttpStatusCode.OK,
                 taskStatus: true,
                 message: $"สร้างรูปสำเร็จ"
+            );
+        }
+
+        public async Task<ResponseMessage> UpdateAsync(IFormFile file, string imageUrl)
+        {
+            var uploadsRoot = Path.Combine(_hostEnvironment.WebRootPath, "images");
+
+            if (!string.IsNullOrEmpty(imageUrl))
+            {
+                var oldFileName = Path.GetFileName(imageUrl);
+                var oldFilePath = Path.Combine(uploadsRoot, oldFileName);
+
+                if (File.Exists(oldFilePath))
+                {
+                    File.Delete(oldFilePath);
+                }
+            }
+
+            if (!Directory.Exists(uploadsRoot))
+            {
+                Directory.CreateDirectory(uploadsRoot);
+            }
+
+            var uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+            var newFilePath = Path.Combine(uploadsRoot, uniqueFileName);
+
+            using (var stream = new FileStream(newFilePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            var ImageUrl = $"/images/{uniqueFileName}";
+
+            return new ResponseMessage(
+                statusCode: HttpStatusCode.OK,
+                taskStatus: true,
+                message: ImageUrl
             );
         }
 
